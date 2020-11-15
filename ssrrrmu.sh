@@ -27,13 +27,13 @@ BBR_file="${file}/bbr.sh"
 jq_file="${ssr_folder}/jq"
 
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
-Info="${Green_font_prefix}[信息]${Font_color_suffix}"
-Error="${Red_font_prefix}[错误]${Font_color_suffix}"
-Tip="${Green_font_prefix}[注意]${Font_color_suffix}"
+Info="${Green_font_prefix}[information]${Font_color_suffix}"
+Error="${Red_font_prefix}[error]${Font_color_suffix}"
+Tip="${Green_font_prefix}[note]${Font_color_suffix}"
 Separator_1="——————————————————————————————"
 
 check_root(){
-	[[ $EUID != 0 ]] && echo -e "${Error} 当前账号非ROOT(或没有ROOT权限)，无法继续操作，请使用${Green_background_prefix} sudo su ${Font_color_suffix}来获取临时ROOT权限（执行后会提示输入当前账号的密码）。" && exit 1
+	[[ $EUID != 0 ]] && echo -e "${Error} Current account is not ROOT(Or not ROOT Authority)，Unable to continue，please use${Green_background_prefix} sudo su ${Font_color_suffix}To get temporary ROOT Authority（After execution, you will be prompted to enter the password of the current account）。" && exit 1
 }
 check_sys(){
 	if [[ -f /etc/redhat-release ]]; then
@@ -57,30 +57,30 @@ check_pid(){
 	PID=`ps -ef |grep -v grep | grep server.py |awk '{print $2}'`
 }
 check_crontab(){
-	[[ ! -e "/usr/bin/crontab" ]] && echo -e "${Error} 缺少依赖 Crontab ，请尝试手动安装 CentOS: yum install crond -y , Debian/Ubuntu: apt-get install cron -y !" && exit 1
+	[[ ! -e "/usr/bin/crontab" ]] && echo -e "${Error} Lack of dependency Crontab ，Please try to install manually CentOS: yum install crond -y , Debian/Ubuntu: apt-get install cron -y !" && exit 1
 }
 SSR_installation_status(){
-	[[ ! -e ${ssr_folder} ]] && echo -e "${Error} 没有发现 ShadowsocksR 文件夹，请检查 !" && exit 1
+	[[ ! -e ${ssr_folder} ]] && echo -e "${Error} not found ShadowsocksR Folder, please check !" && exit 1
 }
 Server_Speeder_installation_status(){
-	[[ ! -e ${Server_Speeder_file} ]] && echo -e "${Error} 没有安装 锐速(Server Speeder)，请检查 !" && exit 1
+	[[ ! -e ${Server_Speeder_file} ]] && echo -e "${Error} Not installed sharp speed(Server Speeder)，Please check !" && exit 1
 }
 LotServer_installation_status(){
-	[[ ! -e ${LotServer_file} ]] && echo -e "${Error} 没有安装 LotServer，请检查 !" && exit 1
+	[[ ! -e ${LotServer_file} ]] && echo -e "${Error} Not installed LotServer，Please check !" && exit 1
 }
 BBR_installation_status(){
 	if [[ ! -e ${BBR_file} ]]; then
-		echo -e "${Error} 没有发现 BBR脚本，开始下载..."
+		echo -e "${Error} not found BBR script，start download..."
 		cd "${file}"
 		if ! wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/bbr.sh; then
-			echo -e "${Error} BBR 脚本下载失败 !" && exit 1
+			echo -e "${Error} BBR Script download failed !" && exit 1
 		else
-			echo -e "${Info} BBR 脚本下载完成 !"
+			echo -e "${Info} BBR Script download completed !"
 			chmod +x bbr.sh
 		fi
 	fi
 }
-# 设置 防火墙规则
+# Set up firewall rules
 Add_iptables(){
 	if [[ ! -z "${ssr_port}" ]]; then
 		iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport ${ssr_port} -j ACCEPT
@@ -119,7 +119,7 @@ Set_iptables(){
 		chmod +x /etc/network/if-pre-up.d/iptables
 	fi
 }
-# 读取 配置信息
+# Read configuration information
 Get_IP(){
 	ip=$(wget -qO- -t1 -T2 ipinfo.io/ip)
 	if [[ -z "${ip}" ]]; then
