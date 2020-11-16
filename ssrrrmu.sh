@@ -542,7 +542,7 @@ Set_config_obfs(){
 Set_config_protocol_param(){
 	while true
 	do
-	echo -e "Please enter the user to be set and the number of devices to be restricted (${Green_font_prefix} auth_* 系列协议 不兼容原版才有效 ${Font_color_suffix})"
+	echo -e "Please enter the user to be set and the number of devices to be restricted (${Green_font_prefix} auth_* The series protocol is not compatible with the original version to be effective ${Font_color_suffix})"
 	echo -e "${Tip} Device number limit: the number of clients that can be connected to each port at the same time(Multi-port mode，Each port is calculated independently)，Recommended at least 2。"
 	read -e -p "(Default: unlimited):" ssr_protocol_param
 	[[ -z "$ssr_protocol_param" ]] && ssr_protocol_param="" && echo && break
