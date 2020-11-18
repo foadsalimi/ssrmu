@@ -6,8 +6,7 @@ export PATH
 #	System Required: CentOS 6+/Debian 6+/Ubuntu 14.04+
 #	Description: Install the ShadowsocksR mudbjson server
 #	Version: 1.0.26
-#	Author: Toyo
-#	Blog: https://doub.io/ss-jc60/
+#	Author: Abderrahmane
 #=================================================
 
 sh_ver="1.0.26"
@@ -374,7 +373,7 @@ View_User_info(){
 Set_config_user(){
 	echo "Please enter the user name to be set (please do not repeat it, it is used to distinguish, does not support Chinese, spaces, and an error will be reported !)"
 	read -e -p "(default: abdo):" ssr_user
-	[[ -z "${ssr_user}" ]] && ssr_user="doubi"
+	[[ -z "${ssr_user}" ]] && ssr_user="abdo"
 	ssr_user=$(echo "${ssr_user}"|sed 's/ //g')
 	echo && echo ${Separator_1} && echo -e "	username : ${Green_font_prefix}${ssr_user}${Font_color_suffix}" && echo ${Separator_1} && echo
 }
@@ -383,7 +382,7 @@ Set_config_port(){
 	do
 	echo -e "Please enter the user port to be set (do not repeat, for distinction)"
 	read -e -p "(default: 443):" ssr_port
-	[[ -z "$ssr_port" ]] && ssr_port="2333"
+	[[ -z "$ssr_port" ]] && ssr_port="443"
 	echo $((${ssr_port}+0)) &>/dev/null
 	if [[ $? == 0 ]]; then
 		if [[ ${ssr_port} -ge 1 ]] && [[ ${ssr_port} -le 65535 ]]; then
@@ -400,7 +399,7 @@ Set_config_port(){
 Set_config_password(){
 	echo "Please enter the user password to be set"
 	read -e -p "(default: 123456):" ssr_password
-	[[ -z "${ssr_password}" ]] && ssr_password="doub.io"
+	[[ -z "${ssr_password}" ]] && ssr_password="12345"
 	echo && echo ${Separator_1} && echo -e "	password : ${Green_font_prefix}${ssr_password}${Font_color_suffix}" && echo ${Separator_1} && echo
 }
 Set_config_method(){
